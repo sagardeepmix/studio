@@ -1,10 +1,39 @@
 
+"use client";
+
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar, Search } from "lucide-react";
+import { Calendar, Search, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { getLatestResults, Result } from '@/services/results';
+import { format } from 'date-fns';
 
 export default function ResultsPage() {
+  const [results, setResults] = useState<Result[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      try {
+        setLoading(true);
+        const fetchedResults = await getLatestResults();
+        setResults(fetchedResults);
+        setError(null);
+      } catch (err) {
+        setError("Failed to load results. Please try again later.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchResults();
+  }, []);
+
+  const todayResults = results.length > 0 ? results[0] : null;
+
   return (
     <div className="min-h-screen bg-background p-4 sm:p-6 md:p-8">
       <div className="container mx-auto">
@@ -32,26 +61,29 @@ export default function ResultsPage() {
                     <Calendar className="text-primary"/>
                     Today's Results
                 </CardTitle>
-                <p className="text-gray-500 text-sm">Date: 25th July, 2024</p>
+                {todayResults && <p className="text-gray-500 text-sm">Date: {format(todayResults.drawDate, 'PP')}</p>}
            </CardHeader>
            <CardContent>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
-                    <div className="p-4 rounded-xl bg-background shadow-[inset_5px_5px_10px_#d9d9d9,inset_-5px_-5px_10px_#ffffff]">
-                        <p className="text-sm text-gray-500">1st Prize</p>
-                        <p className="text-2xl font-bold text-primary">₹1 Crore</p>
-                        <p className="font-mono text-lg mt-1">AB123456</p>
-                    </div>
-                     <div className="p-4 rounded-xl bg-background shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff]">
-                        <p className="text-sm text-gray-500">2nd Prize</p>
-                        <p className="text-xl font-bold">₹9,000</p>
-                        <p className="font-mono text-base mt-1">CD789012</p>
-                    </div>
-                     <div className="p-4 rounded-xl bg-background shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff]">
-                        <p className="text-sm text-gray-500">3rd Prize</p>
-                        <p className="text-xl font-bold">₹450</p>
-                        <p className="font-mono text-base mt-1">EF345678</p>
-                    </div>
-                </div>
+                {loading && (
+                  <div className="flex justify-center items-center h-40">
+                    <Loader2 className="animate-spin text-primary" size={48} />
+                  </div>
+                )}
+                {error && <p className="text-destructive text-center">{error}</p>}
+                {!loading && !error && results.length === 0 && (
+                  <p className="text-gray-600 text-center h-40 flex items-center justify-center">No results found.</p>
+                )}
+                {!loading && !error && results.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
+                      {results.map((result) => (
+                         <div key={result.id} className={`p-4 rounded-xl ${result.prizeName === '1st Prize' ? 'bg-background shadow-[inset_5px_5px_10px_#d9d9d9,inset_-5px_-5px_10px_#ffffff]' : 'bg-background shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff]'}`}>
+                            <p className="text-sm text-gray-500">{result.prizeName}</p>
+                            <p className={`text-2xl font-bold ${result.prizeName === '1st Prize' ? 'text-primary' : ''}`}>{result.prizeAmount}</p>
+                            <p className="font-mono text-lg mt-1">{result.winningNumber}</p>
+                        </div>
+                      ))}
+                  </div>
+                )}
            </CardContent>
         </Card>
 

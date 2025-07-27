@@ -10,6 +10,7 @@ import { PlusCircle, Users } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { createUser } from "@/services/auth";
+import { addResult } from "@/services/results";
 import { useToast } from "@/hooks/use-toast";
 
 
@@ -19,6 +20,10 @@ export default function AdminPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { toast } = useToast();
+
+  const [prizeName, setPrizeName] = useState('');
+  const [prizeAmount, setPrizeAmount] = useState('');
+  const [winningNumber, setWinningNumber] = useState('');
 
   const handleAddMember = async () => {
     try {
@@ -30,6 +35,34 @@ export default function AdminPage() {
       setAddMemberOpen(false);
       setEmail('');
       setPassword('');
+    } catch (error: any) {
+        toast({
+            title: "Error",
+            description: error.message,
+            variant: "destructive",
+        });
+    }
+  };
+  
+  const handleAddResult = async () => {
+    if (!prizeName || !prizeAmount || !winningNumber) {
+        toast({
+            title: "Error",
+            description: "Please fill all fields.",
+            variant: "destructive",
+        });
+        return;
+    }
+    try {
+        await addResult({ prizeName, prizeAmount, winningNumber });
+        toast({
+            title: "Success",
+            description: "Result added successfully.",
+        });
+        setAddResultOpen(false);
+        setPrizeName('');
+        setPrizeAmount('');
+        setWinningNumber('');
     } catch (error: any) {
         toast({
             title: "Error",
@@ -70,24 +103,24 @@ export default function AdminPage() {
                                 <Label htmlFor="prizeName" className="text-right text-gray-700">
                                   Prize Name
                                 </Label>
-                                <Input id="prizeName" placeholder="e.g. 1st Prize" className="col-span-3 bg-background border-none rounded-full h-11 px-4 text-base shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]" />
+                                <Input id="prizeName" value={prizeName} onChange={(e) => setPrizeName(e.target.value)} placeholder="e.g. 1st Prize" className="col-span-3 bg-background border-none rounded-full h-11 px-4 text-base shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]" />
                               </div>
                               <div className="grid grid-cols-4 items-center gap-4">
                                 <Label htmlFor="prizeAmount" className="text-right text-gray-700">
                                   Amount
                                 </Label>
-                                <Input id="prizeAmount" placeholder="e.g. ₹1 Crore" className="col-span-3 bg-background border-none rounded-full h-11 px-4 text-base shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]" />
+                                <Input id="prizeAmount" value={prizeAmount} onChange={(e) => setPrizeAmount(e.target.value)} placeholder="e.g. ₹1 Crore" className="col-span-3 bg-background border-none rounded-full h-11 px-4 text-base shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]" />
                               </div>
                                <div className="grid grid-cols-4 items-center gap-4">
                                 <Label htmlFor="winningNumber" className="text-right text-gray-700">
                                   Winner No.
                                 </Label>
-                                <Input id="winningNumber" placeholder="e.g. AB123456" className="col-span-3 bg-background border-none rounded-full h-11 px-4 text-base shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]" />
+                                <Input id="winningNumber" value={winningNumber} onChange={(e) => setWinningNumber(e.target.value)} placeholder="e.g. AB123456" className="col-span-3 bg-background border-none rounded-full h-11 px-4 text-base shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]" />
                               </div>
                             </div>
                             <DialogFooter>
                               <Button
-                                onClick={() => setAddResultOpen(false)}
+                                onClick={handleAddResult}
                                 className="rounded-full h-12 bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg transform transition hover:shadow-xl hover:-translate-y-0.5"
                               >
                                 Save Result
