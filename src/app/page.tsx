@@ -27,7 +27,7 @@ export default function Home() {
           <a href="#" className="hover:text-primary transition-colors">Claims</a>
           <a href="#" className="hover:text-primary transition-colors">Support</a>
         </nav>
-        <Button variant="outline" className="rounded-full shadow-sm bg-white hover:bg-gray-50">
+        <Button variant="outline" className="rounded-full shadow-sm bg-white hover:bg-gray-50 transform transition hover:-translate-y-0.5">
           <User className="mr-2 h-4 w-4" /> My Profile
         </Button>
       </header>
@@ -39,10 +39,10 @@ export default function Home() {
               Trusted Naam, Fantastic Kaam!
             </h1>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-wrap">
               {services.map((service, index) => (
-                <div key={index} className="flex flex-col items-center gap-2 text-center">
-                  <div className={`p-4 rounded-2xl transition-all duration-300 ${service.active ? 'bg-primary/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]' : 'bg-gray-100'}`}>
+                <div key={index} className="flex flex-col items-center gap-2 text-center cursor-pointer">
+                  <div className={`p-4 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 ${service.active ? 'bg-primary/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]' : 'bg-gray-100 hover:bg-gray-200'}`}>
                     {service.icon}
                   </div>
                   <span className={`text-sm font-medium ${service.active ? 'text-primary' : 'text-gray-600'}`}>{service.name}</span>
@@ -54,8 +54,8 @@ export default function Home() {
               <div className="flex flex-col gap-4">
                 <label htmlFor="ticketNumber" className="text-sm font-medium text-gray-700">Your Lottery Ticket Number</label>
                 <div className="relative">
-                  <Input id="ticketNumber" placeholder="WB12A12345" className="bg-gray-100 border-none rounded-full h-12 pl-4 pr-32 text-base"/>
-                  <Button className="absolute right-1 top-1/2 -translate-y-1/2 rounded-full h-10 bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg">
+                  <Input id="ticketNumber" placeholder="WB12A12345" className="bg-gray-100 border-none rounded-full h-12 pl-4 pr-36 text-base"/>
+                  <Button className="absolute right-1 top-1/2 -translate-y-1/2 rounded-full h-10 px-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg transform transition hover:shadow-xl hover:-translate-y-0.5">
                     Get Result
                   </Button>
                 </div>
@@ -63,7 +63,7 @@ export default function Home() {
             </Card>
 
             <div className="flex flex-col gap-4">
-               <Card className="p-4 rounded-2xl shadow-[0_5px_30px_-10px_rgba(220,220,240,0.7)] bg-white/80 backdrop-blur-sm flex items-center justify-between">
+               <Card className="p-4 rounded-2xl shadow-[0_5px_30px_-10px_rgba(220,220,240,0.7)] bg-white/80 backdrop-blur-sm flex items-center justify-between transform transition hover:-translate-y-1 cursor-pointer">
                  <div className="flex items-center gap-4">
                    <div className="p-3 bg-gray-100 rounded-full">
                       <RefreshCw className="w-5 h-5 text-gray-500"/>
@@ -74,7 +74,7 @@ export default function Home() {
                     <ArrowRight className="w-5 h-5 text-gray-600"/>
                  </Button>
                </Card>
-               <Card className="p-4 rounded-2xl shadow-[0_5px_30px_-10px_rgba(220,220,240,0.7)] bg-white/80 backdrop-blur-sm flex items-center justify-between">
+               <Card className="p-4 rounded-2xl shadow-[0_5px_30px_-10px_rgba(220,220,240,0.7)] bg-white/80 backdrop-blur-sm flex items-center justify-between transform transition hover:-translate-y-1 cursor-pointer">
                  <div className="flex items-center gap-4">
                    <div className="p-3 bg-gray-100 rounded-full">
                       <Shield className="w-5 h-5 text-gray-500"/>
