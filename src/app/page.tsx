@@ -1,7 +1,9 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ChevronDown, User, Car, Bike, Heart, Plane, LayoutGrid, RefreshCw, ArrowRight, Shield } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   const services = [
@@ -24,12 +26,14 @@ export default function Home() {
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
           <a href="#" className="flex items-center gap-1 hover:text-primary transition-colors">Personal <ChevronDown className="w-4 h-4" /></a>
           <a href="#" className="flex items-center gap-1 hover:text-primary transition-colors">Business <ChevronDown className="w-4 h-4" /></a>
-          <a href="#" className="hover:text-primary transition-colors">Claims</a>
+          <Link href="/results" className="hover:text-primary transition-colors">Results</Link>
           <a href="#" className="hover:text-primary transition-colors">Support</a>
         </nav>
-        <Button variant="outline" className="rounded-full bg-background border-none text-gray-700 shadow-[5px_5px_10px_#bec2c8,-5px_-5px_10px_#ffffff] hover:shadow-[inset_2px_2px_5px_#bec2c8,inset_-2px_-2px_5px_#ffffff] hover:-translate-y-px transform transition duration-300 ease-in-out">
-          <User className="mr-2 h-4 w-4" /> My Profile
-        </Button>
+        <Link href="/dashboard">
+          <Button variant="outline" className="rounded-full bg-background border-none text-gray-700 shadow-[5px_5px_10px_#bec2c8,-5px_-5px_10px_#ffffff] hover:shadow-[inset_2px_2px_5px_#bec2c8,inset_-2px_-2px_5px_#ffffff] hover:-translate-y-px transform transition duration-300 ease-in-out">
+            <User className="mr-2 h-4 w-4" /> My Profile
+          </Button>
+        </Link>
       </header>
 
       <main className="container mx-auto px-6 py-12">
