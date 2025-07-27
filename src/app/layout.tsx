@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import { PT_Sans } from "next/font/google";
 
-const pt_sans = PT_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -21,8 +19,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body className={pt_sans.className}>
-        <div className="flex flex-col min-h-screen">
+      <body className={inter.className}>
+        <div className="flex flex-col min-h-screen bg-background">
           <main className="flex-grow">{children}</main>
         </div>
         <Toaster />
