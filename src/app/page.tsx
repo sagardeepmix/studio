@@ -1,67 +1,46 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bell, Ticket, Gift, TrendingUp, Shield, BarChart, Settings, User } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Ticket, Gift, BarChart, Users, MoreHorizontal } from "lucide-react";
 
 export default function Home() {
   const services = [
-    { name: "Daily Tickets", icon: <Ticket className="w-8 h-8 text-primary" /> },
-    { name: "Special Draws", icon: <Gift className="w-8 h-8 text-primary" /> },
-    { name: "Check Results", icon: <BarChart className="w-8 h-8 text-primary" /> },
-    { name: "Syndicates", icon: <User className="w-8 h-8 text-primary" /> },
-    { name: "Instant Win", icon: <TrendingUp className="w-8 h-8 text-primary" /> },
-    { name: "Secure Payments", icon: <Shield className="w-8 h-8 text-primary" /> },
+    { name: "Daily Tickets", icon: <Ticket className="w-10 h-10 text-primary" /> },
+    { name: "Special Draws", icon: <Gift className="w-10 h-10 text-primary" /> },
+    { name: "Check Results", icon: <BarChart className="w-10 h-10 text-primary" /> },
+    { name: "Syndicates", icon: <Users className="w-10 h-10 text-primary" /> },
   ];
 
   return (
-    <div className="bg-background min-h-screen">
-      <header className="bg-primary text-primary-foreground p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold">LotteryPlus</h1>
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon">
-              <Bell className="h-6 w-6" />
-            </Button>
-            <Button variant="ghost" size="icon">
-              <Settings className="h-6 w-6" />
-            </Button>
+    <div className="relative min-h-screen bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col items-center justify-center p-4 overflow-hidden">
+      <div className="text-center mb-8 z-10">
+        <h1 className="text-4xl md:text-5xl font-bold">One App, All Lotteries.</h1>
+        <p className="text-lg md:text-xl mt-2">Trusted by millions of players</p>
+      </div>
+
+      <div className="relative w-full max-w-sm mx-auto z-10">
+        <div className="relative bg-white rounded-[2.5rem] p-6 shadow-2xl border-8 border-gray-800">
+          <div className="flex flex-col items-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-800">LotteryPlus</h2>
+            <p className="text-gray-500">ALWAYS A CHANCE TO WIN</p>
           </div>
-        </div>
-      </header>
 
-      <main className="container mx-auto p-4 md:p-6">
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>Welcome Back!</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">Check the latest lottery results and buy your tickets for the next big draw!</p>
-            <div className="mt-4 flex gap-4">
-                <Button>Buy Tickets</Button>
-                <Button variant="secondary">View Results</Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        <div>
-          <h2 className="text-2xl font-bold mb-4">Our Services</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 text-center">
             {services.map((service) => (
-              <Card key={service.name} className="text-center hover:shadow-lg transition-shadow cursor-pointer">
-                <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
+              <Card key={service.name} className="bg-gray-50 hover:bg-gray-100 transition-all duration-300 rounded-2xl shadow-md border-2 border-gray-100 cursor-pointer">
+                <CardContent className="p-4 flex flex-col items-center justify-center gap-2">
                   {service.icon}
-                  <p className="font-semibold text-sm">{service.name}</p>
+                  <p className="font-semibold text-sm text-gray-700">{service.name}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
+          
+          <div className="text-center mt-8">
+            <a href="#" className="text-primary font-semibold hover:underline">
+              and more...
+            </a>
+          </div>
         </div>
-      </main>
-
-      <footer className="bg-secondary text-secondary-foreground mt-8 py-4">
-        <div className="container mx-auto text-center text-sm">
-            <p>&copy; 2024 LotteryPlus. All rights reserved.</p>
-        </div>
-      </footer>
+      </div>
     </div>
   );
 }
