@@ -9,9 +9,35 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { PlusCircle, Users } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import { createUser } from "@/services/auth";
+import { useToast } from "@/hooks/use-toast";
+
 
 export default function AdminPage() {
-  const [open, setOpen] = useState(false);
+  const [addResultOpen, setAddResultOpen] = useState(false);
+  const [addMemberOpen, setAddMemberOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { toast } = useToast();
+
+  const handleAddMember = async () => {
+    try {
+      await createUser(email, password);
+      toast({
+        title: "Success",
+        description: "Member added successfully.",
+      });
+      setAddMemberOpen(false);
+      setEmail('');
+      setPassword('');
+    } catch (error: any) {
+        toast({
+            title: "Error",
+            description: error.message,
+            variant: "destructive",
+        });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background p-4 sm:p-6 md:p-8">
@@ -29,7 +55,7 @@ export default function AdminPage() {
                 <CardHeader>
                     <CardTitle className="flex items-center justify-between text-xl font-semibold">
                         <span>Manage Results</span>
-                        <Dialog open={open} onOpenChange={setOpen}>
+                        <Dialog open={addResultOpen} onOpenChange={setAddResultOpen}>
                           <DialogTrigger asChild>
                             <Button size="sm" className="rounded-full h-9 bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg">
                                <PlusCircle className="mr-2 h-4 w-4" /> Add Result
@@ -61,7 +87,7 @@ export default function AdminPage() {
                             </div>
                             <DialogFooter>
                               <Button
-                                onClick={() => setOpen(false)}
+                                onClick={() => setAddResultOpen(false)}
                                 className="rounded-full h-12 bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg transform transition hover:shadow-xl hover:-translate-y-0.5"
                               >
                                 Save Result
@@ -79,9 +105,45 @@ export default function AdminPage() {
           <div className="lg:col-span-1">
              <Card className="p-6 rounded-2xl shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff] border-none bg-background">
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-xl font-semibold">
-                        <Users className="text-primary"/>
-                        Manage Members
+                    <CardTitle className="flex items-center justify-between text-xl font-semibold">
+                       <div className="flex items-center gap-2">
+                         <Users className="text-primary"/>
+                         Manage Members
+                       </div>
+                        <Dialog open={addMemberOpen} onOpenChange={setAddMemberOpen}>
+                          <DialogTrigger asChild>
+                            <Button size="sm" className="rounded-full h-9 bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg">
+                               <PlusCircle className="mr-2 h-4 w-4" /> Add Member
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-[425px] bg-background border-none rounded-2xl shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff]">
+                            <DialogHeader>
+                              <DialogTitle className="text-primary text-2xl">Add New Member</DialogTitle>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="email" className="text-right text-gray-700">
+                                  Email
+                                </Label>
+                                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="member@example.com" className="col-span-3 bg-background border-none rounded-full h-11 px-4 text-base shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]" />
+                              </div>
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="password" className="text-right text-gray-700">
+                                  Password
+                                </Label>
+                                <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="col-span-3 bg-background border-none rounded-full h-11 px-4 text-base shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]" />
+                              </div>
+                            </div>
+                            <DialogFooter>
+                              <Button
+                                onClick={handleAddMember}
+                                className="rounded-full h-12 bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg transform transition hover:shadow-xl hover:-translate-y-0.5"
+                              >
+                                Add Member
+                              </Button>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
