@@ -27,7 +27,7 @@ export default function Home() {
           <a href="#" className="hover:text-primary transition-colors">Claims</a>
           <a href="#" className="hover:text-primary transition-colors">Support</a>
         </nav>
-        <Button variant="outline" className="rounded-full shadow-sm bg-white hover:bg-gray-50 transform transition hover:-translate-y-0.5">
+        <Button variant="outline" className="rounded-full bg-gray-50/80 border-gray-200/90 text-gray-700 shadow-[0_4px_10px_rgba(0,0,0,0.05),_inset_0_2px_4px_rgba(255,255,255,0.8),_inset_0_-2px_2px_rgba(0,0,0,0.02)] hover:shadow-[0_6px_14px_rgba(0,0,0,0.08)] hover:-translate-y-px transform transition duration-300 ease-in-out">
           <User className="mr-2 h-4 w-4" /> My Profile
         </Button>
       </header>
