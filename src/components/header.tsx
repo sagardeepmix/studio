@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, LogIn, UserPlus } from "lucide-react";
+import { BookOpen, LogIn, UserPlus, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -12,6 +12,7 @@ export default function Header() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/courses", label: "Courses" },
+    { href: "/admin", label: "Admin", icon: Shield },
   ];
 
   return (
@@ -33,10 +34,11 @@ export default function Header() {
                   variant="ghost"
                   className={cn(
                     "text-foreground/80 hover:text-primary hover:bg-primary/5",
-                    pathname === link.href &&
-                      "text-primary bg-primary/10 font-bold"
+                    pathname.startsWith(link.href) && link.href !== "/" && "text-primary bg-primary/10 font-bold",
+                    pathname === "/" && link.href === "/" && "text-primary bg-primary/10 font-bold"
                   )}
                 >
+                  {link.icon && <link.icon className="mr-2 h-4 w-4" />}
                   {link.label}
                 </Button>
               </Link>
