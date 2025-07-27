@@ -1,46 +1,50 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Ticket, Gift, BarChart, Users, MoreHorizontal } from "lucide-react";
+import { Ticket, Gift, BarChart, Users, Star, Award } from "lucide-react";
 
 export default function Home() {
   const services = [
-    { name: "Daily Tickets", icon: <Ticket className="w-10 h-10 text-primary" /> },
-    { name: "Special Draws", icon: <Gift className="w-10 h-10 text-primary" /> },
-    { name: "Check Results", icon: <BarChart className="w-10 h-10 text-primary" /> },
-    { name: "Syndicates", icon: <Users className="w-10 h-10 text-primary" /> },
+    { name: "Daily Tickets", icon: <Ticket className="w-8 h-8 text-primary" /> },
+    { name: "Special Draws", icon: <Gift className="w-8 h-8 text-primary" /> },
+    { name: "Check Results", icon: <BarChart className="w-8 h-8 text-primary" /> },
+    { name: "VIP Membership", icon: <Star className="w-8 h-8 text-primary" /> },
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col items-center justify-center p-4 overflow-hidden">
-      <div className="text-center mb-8 z-10">
-        <h1 className="text-4xl md:text-5xl font-bold">One App, All Lotteries.</h1>
-        <p className="text-lg md:text-xl mt-2">Trusted by millions of players</p>
-      </div>
-
-      <div className="relative w-full max-w-sm mx-auto z-10">
-        <div className="relative bg-white rounded-[2.5rem] p-6 shadow-2xl border-8 border-gray-800">
-          <div className="flex flex-col items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800">LotteryPlus</h2>
-            <p className="text-gray-500">ALWAYS A CHANCE TO WIN</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 text-center">
-            {services.map((service) => (
-              <Card key={service.name} className="bg-gray-50 hover:bg-gray-100 transition-all duration-300 rounded-2xl shadow-md border-2 border-gray-100 cursor-pointer">
-                <CardContent className="p-4 flex flex-col items-center justify-center gap-2">
-                  {service.icon}
-                  <p className="font-semibold text-sm text-gray-700">{service.name}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="text-center mt-8">
-            <a href="#" className="text-primary font-semibold hover:underline">
-              and more...
-            </a>
-          </div>
+    <div className="min-h-screen bg-secondary/30 text-gray-800 flex flex-col">
+      <header className="p-4 bg-background shadow-sm">
+        <div className="container mx-auto flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-primary">Bhagyolipi</h1>
+          <Users className="w-6 h-6 text-accent" />
         </div>
-      </div>
+      </header>
+
+      <main className="flex-grow container mx-auto p-4 md:p-6 flex items-center justify-center">
+        <div className="w-full max-w-md text-center">
+            <div className="bg-background rounded-2xl p-6 shadow-xl border-2 border-white">
+              <div className="flex flex-col items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-700">All Services Under One Roof</h2>
+                <p className="text-gray-500 text-sm mt-1">Quickly access all our features</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                {services.map((service) => (
+                  <Card key={service.name} className="bg-background hover:bg-secondary/50 transition-all duration-300 rounded-xl shadow-md border-gray-100 cursor-pointer">
+                    <CardContent className="p-4 flex flex-col items-center justify-center gap-2">
+                      {service.icon}
+                      <p className="font-semibold text-sm text-center text-gray-700">{service.name}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+        </div>
+      </main>
+
+       <footer className="p-4 bg-background mt-auto">
+          <div className="container mx-auto text-center text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} Bhagyolipi Dear 4 You. All rights reserved.
+          </div>
+      </footer>
     </div>
   );
 }
