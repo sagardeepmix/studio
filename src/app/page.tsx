@@ -16,7 +16,7 @@ export default function Home() {
     <div className="min-h-screen w-full bg-background font-sans">
       <header className="container mx-auto py-4 px-6 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <div className="bg-white p-2 rounded-lg shadow-md">
+          <div className="bg-background p-2 rounded-lg shadow-[4px_4px_8px_#d0d0d0,-4px_-4px_8px_#ffffff]">
             <TicketIcon />
           </div>
           <span className="font-bold text-lg text-primary">Bhagyolipi</span>
@@ -27,7 +27,7 @@ export default function Home() {
           <a href="#" className="hover:text-primary transition-colors">Claims</a>
           <a href="#" className="hover:text-primary transition-colors">Support</a>
         </nav>
-        <Button variant="outline" className="rounded-full bg-gray-50/80 border-gray-200/90 text-gray-700 shadow-[0_4px_10px_rgba(0,0,0,0.05),_inset_0_2px_4px_rgba(255,255,255,0.8),_inset_0_-2px_2px_rgba(0,0,0,0.02)] hover:shadow-[0_6px_14px_rgba(0,0,0,0.08)] hover:-translate-y-px transform transition duration-300 ease-in-out">
+        <Button variant="outline" className="rounded-full bg-background border-none text-gray-700 shadow-[5px_5px_10px_#bec2c8,-5px_-5px_10px_#ffffff] hover:shadow-[inset_2px_2px_5px_#bec2c8,inset_-2px_-2px_5px_#ffffff] hover:-translate-y-px transform transition duration-300 ease-in-out">
           <User className="mr-2 h-4 w-4" /> My Profile
         </Button>
       </header>
@@ -54,11 +54,11 @@ export default function Home() {
               ))}
             </div>
 
-            <Card className="p-6 rounded-2xl shadow-[0_10px_40px_-10px_rgba(220,220,240,0.8)] border-none bg-white/80 backdrop-blur-sm">
+            <Card className="p-6 rounded-2xl shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff] border-none bg-background">
               <div className="flex flex-col gap-4">
                 <label htmlFor="ticketNumber" className="text-sm font-medium text-gray-700">Your Lottery Ticket Number</label>
                 <div className="relative">
-                  <Input id="ticketNumber" placeholder="WB12A12345" className="bg-gray-100 border-none rounded-full h-12 pl-4 pr-36 text-base"/>
+                  <Input id="ticketNumber" placeholder="WB12A12345" className="bg-background border-none rounded-full h-12 pl-4 pr-36 text-base shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]"/>
                   <Button className="absolute right-1 top-1/2 -translate-y-1/2 rounded-full h-10 px-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg transform transition hover:shadow-xl hover:-translate-y-0.5">
                     Get Result
                   </Button>
@@ -67,25 +67,25 @@ export default function Home() {
             </Card>
 
             <div className="flex flex-col gap-4">
-               <Card className="p-4 rounded-2xl shadow-[0_5px_30px_-10px_rgba(220,220,240,0.7)] bg-white/80 backdrop-blur-sm flex items-center justify-between transform transition hover:-translate-y-1 cursor-pointer">
+               <Card className="p-4 rounded-2xl shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff] bg-background flex items-center justify-between transform transition hover:-translate-y-1 cursor-pointer border-none">
                  <div className="flex items-center gap-4">
-                   <div className="p-3 bg-gray-100 rounded-full">
+                   <div className="p-3 bg-background rounded-full shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]">
                       <RefreshCw className="w-5 h-5 text-gray-500"/>
                    </div>
                    <span className="font-medium text-gray-800">Renew your VIP membership</span>
                  </div>
-                 <Button variant="ghost" size="icon" className="rounded-full bg-gray-100 hover:bg-gray-200">
+                 <Button variant="ghost" size="icon" className="rounded-full bg-background shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff] hover:bg-background/80">
                     <ArrowRight className="w-5 h-5 text-gray-600"/>
                  </Button>
                </Card>
-               <Card className="p-4 rounded-2xl shadow-[0_5px_30px_-10px_rgba(220,220,240,0.7)] bg-white/80 backdrop-blur-sm flex items-center justify-between transform transition hover:-translate-y-1 cursor-pointer">
+               <Card className="p-4 rounded-2xl shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff] bg-background flex items-center justify-between transform transition hover:-translate-y-1 cursor-pointer border-none">
                  <div className="flex items-center gap-4">
-                   <div className="p-3 bg-gray-100 rounded-full">
+                   <div className="p-3 bg-background rounded-full shadow-[inset_3px_3px_7px_#d9d9d9,inset_-3px_-3px_7px_#ffffff]">
                       <Shield className="w-5 h-5 text-gray-500"/>
                    </div>
                    <span className="font-medium text-gray-800">Insure your Lucky Number</span>
                  </div>
-                 <Button variant="ghost" size="icon" className="rounded-full bg-gray-100 hover:bg-gray-200">
+                 <Button variant="ghost" size="icon" className="rounded-full bg-background shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff] hover:bg-background/80">
                     <ArrowRight className="w-5 h-5 text-gray-600"/>
                  </Button>
                </Card>
