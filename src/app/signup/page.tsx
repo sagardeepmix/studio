@@ -9,6 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { createUser } from "@/services/auth";
 import { useToast } from "@/hooks/use-toast";
+import { addUserProfile } from "@/services/users";
+import { getAuth } from "firebase/auth";
 
 export default function SignupPage() {
   const [name, setName] = useState('');
@@ -20,7 +22,8 @@ export default function SignupPage() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await createUser(email, password);
+      const userCredential = await createUser(email, password);
+      await addUserProfile(userCredential.user.uid, email, name);
       toast({
         title: "Account Created",
         description: "Welcome! You have been successfully signed up.",
