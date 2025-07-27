@@ -41,8 +41,12 @@ export default function Home() {
 
             <div className="flex items-center gap-4 flex-wrap">
               {services.map((service, index) => (
-                <div key={index} className="flex flex-col items-center gap-2 text-center cursor-pointer">
-                  <div className={`p-4 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 ${service.active ? 'bg-primary/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]' : 'bg-gray-100 hover:bg-gray-200'}`}>
+                <div key={index} className="flex flex-col items-center gap-2 text-center cursor-pointer group">
+                  <div className={`p-4 rounded-2xl transition-all duration-300 transform group-hover:-translate-y-1 
+                    ${service.active 
+                      ? 'bg-background shadow-[inset_5px_5px_10px_#d9d9d9,inset_-5px_-5px_10px_#ffffff] text-primary' 
+                      : 'bg-background shadow-[5px_5px_10px_#d9d9d9,-5px_-5px_10px_#ffffff] text-gray-500'
+                    }`}>
                     {service.icon}
                   </div>
                   <span className={`text-sm font-medium ${service.active ? 'text-primary' : 'text-gray-600'}`}>{service.name}</span>
