@@ -1,5 +1,5 @@
-import MemberDashboard from "@/components/member-dashboard";
+import LandingPage from "@/components/landing-page";
 
 export default function Home() {
-  return <MemberDashboard />;
+  return <LandingPage />;
 }

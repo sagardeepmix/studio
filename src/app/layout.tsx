@@ -4,8 +4,8 @@ import { Toaster } from "@/components/ui/toaster"
 import Header from '@/components/header';
 
 export const metadata: Metadata = {
-  title: 'Bhagyolipi Dear 4 You',
-  description: 'Your daily lottery predictions',
+  title: 'E-Learn Platform',
+  description: 'Your gateway to knowledge',
 };
 
 export default function RootLayout({
