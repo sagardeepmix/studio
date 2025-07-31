@@ -1,0 +1,43 @@
+// Firebase Admin SDK ইম্পোর্ট করুন
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+exports.sendPushNotification = functions.firestore
+    .document('sentPushNotifications/{pushId}')
+    .onCreate(async (snap, context) => {
+        const notificationData = snap.data();
+        const recipientUid = notificationData.recipientUid; // Assuming you store recipient's UID
+        const messageTitle = notificationData.title;
+        const messageBody = notificationData.body;
+
+        // recipientUid থেকে ব্যবহারকারীর FCM রেজিস্ট্রেশন টোকেন পেতে হবে
+        // এটি সাধারণত Firestore-এর users/{userId} ডকুমেন্টে সেভ করা থাকে
+        const userDoc = await admin.firestore().collection('users').doc(recipientUid).get();
+        const fcmToken = userDoc.data()?.fcmToken; // Assuming 'fcmToken' field
+
+        if (!fcmToken) {
+            console.log('No FCM token found for user:', recipientUid);
+            return null;
+        }
+
+        const payload = {
+            notification: {
+                title: messageTitle,
+                body: messageBody
+            },
+            data: { // Optional: for data messages
+                key1: 'value1',
+                key2: 'value2'
+            }
+        };
+
+        try {
+            const response = await admin.messaging().sendToDevice(fcmToken, payload);
+            console.log('Successfully sent message:', response);
+            return null;
+        } catch (error) {
+            console.error('Error sending message:', error);
+            return null;
+        }
+    });
